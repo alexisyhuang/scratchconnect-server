@@ -54,6 +54,8 @@ server.get('/', (req, res, next) => {
         bio: profileresponse.data.profile.bio,
         workingon: profileresponse.data.profile.status,
       };
+      console.log("project response: ", projectresponse);
+      console.log("profile response: ", profileresponse);
       res.json(responseData);
       return next();
     } catch (error) {
