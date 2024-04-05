@@ -40,7 +40,7 @@ server.use(express.json({limit: '1gb'}));
 server.get('/', (req, res, next) => {
   if (!req.query.m) {
     res.end();
-    next(false);
+    return next(false);
   }
   (async () => {
     try {
@@ -55,9 +55,11 @@ server.get('/', (req, res, next) => {
         workingon: profileresponse.data.profile.status,
       };
       res.json(responseData);
+      return next();
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred' });
+      return next();
     }
     /*
     try {
@@ -108,9 +110,11 @@ server.get('/search', async (req, res) => {
 
     const response = await axios.get(`https://api.scratch.mit.edu/search/projects?q=${keyword}`);
     res.json(response.data);
+    return next();
   } catch (error) {
     console.error('Error fetching projects for keyword:', error);
     res.status(500).json({ error: 'An error occurred' });
+    return next();
   }
 });
 
