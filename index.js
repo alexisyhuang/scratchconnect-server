@@ -103,7 +103,7 @@ server.get('/', (req, res, next) => {
   })();
 });
 
-server.get('/search', async (req, res) => {
+server.get('/search', async (req, res, next) => {
   try {
     const keyword = req.query.keyword;
     if (!keyword) {
