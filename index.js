@@ -49,13 +49,13 @@ server.get('/', (req, res, next) => {
       console.log(username)
       const projectresponse = await axios.get(`https://api.scratch.mit.edu/users/${username}/projects/`);
       const profileresponse = await axios.get(`https://api.scratch.mit.edu/users/${username}/`);
+      console.log("project response: ", projectresponse);
+      console.log("profile response: ", profileresponse);
       const responseData = {
         projects: projectresponse.data,
         bio: profileresponse.data.profile.bio,
         workingon: profileresponse.data.profile.status,
       };
-      console.log("project response: ", projectresponse);
-      console.log("profile response: ", profileresponse);
       res.json(responseData);
       return next();
     } catch (error) {
